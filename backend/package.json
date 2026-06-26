@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "build": "if exist dist rmdir /s /q dist && xcopy src dist /E /I /Y",
+      "build": "mkdir dist && xcopy src dist /E /I /Y",
+    
     "dev": "nodemon src/index.js",
     "start": "node src/index.js"
    
