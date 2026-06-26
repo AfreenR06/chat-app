@@ -11,7 +11,7 @@ function App() {
       <h1>hi</h1>
     <header>
         <Show when="signed-out">
-          <SignInButton mode="modal"/>
+          <SignInButton mode="modal" />
           <SignUpButton mode="modal" />
         </Show>
         <Show when="signed-in">
