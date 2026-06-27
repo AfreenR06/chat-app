@@ -8,7 +8,7 @@ import User from "./models/User.model.js";
 import Message from "./models/message.model.js";
 import connectDB from "./lib/db.js";
 import job from "./lib/cron.js";
-import clerkwebhook from "./webhooks/clerk.webhook.js"
+import clerkWebhook from "./webhooks/clerk.webhook.js"
 import { clerkMiddleware } from '@clerk/express'
 
 const app = express();
