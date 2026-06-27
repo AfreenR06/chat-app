@@ -9,6 +9,8 @@ import Message from "./models/message.model.js";
 import connectDB from "./lib/db.js";
 import job from "./lib/cron.js";
 import clerkWebhook from "./webhooks/clerk.webhook.js"
+import authRoutes from "./routes/auth.route.js"
+import messageRoutes from "./routes/message.rourte.js"
 import { clerkMiddleware } from '@clerk/express'
 
 const app = express();
@@ -26,6 +28,7 @@ app.get("/health", (req, res) => {
     res.status(200).json({message:"Server is healthy"});
 } 
 )
+app.use("/api/auth", authRoutes)
 app.get("/test-user", async (req, res) => {
     try {
         const user = await User.create({
