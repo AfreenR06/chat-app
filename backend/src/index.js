@@ -24,8 +24,21 @@ app.use(clerkMiddleware());
 app.get("/health", (req, res) => {
     // const {message,image,video} = req.body;
     res.status(200).json({message:"Server is healthy"});
-}   
+} 
 )
+app.get("/test-user", async (req, res) => {
+    try {
+        const user = await User.create({
+            clerkId: "123",
+            email: "test@gmail.com",
+            fullName: "Test User"
+        });
+
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 if(fs.existsSync(publicDir)) {
     app.use(express.static(publicDir));
     app.get("/{*any}", (req, res, next) => {
