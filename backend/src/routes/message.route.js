@@ -5,16 +5,18 @@ import {
   getUsersForSidebar,
   sendMessage,
 } from "../controllers/message.controller.js";
+
 import { protectRoute } from "../middleware/auth.middleware.js";
 import { upload } from "../middleware/upload.middleware.js";
 
 const router = express.Router();
 
-router.use(protectRoute);
-
-router.get("/users", getUsersForSidebar);
-router.get("/conversations", getConversationsForSidebar);
-router.get("/:id", getMessages);
+// Public testing route
 router.post("/send/:id", upload.single("media"), sendMessage);
+
+// Protected routes
+router.get("/users", protectRoute, getUsersForSidebar);
+router.get("/conversations", protectRoute, getConversationsForSidebar);
+router.get("/:id", protectRoute, getMessages);
 
 export default router;
