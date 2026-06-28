@@ -12,7 +12,12 @@ import { upload } from "../middleware/upload.middleware.js";
 const router = express.Router();
 
 // Public testing route
-router.post("/send/:id", upload.single("media"), sendMessage);
+router.post(
+  "/send/:id",
+  protectRoute,
+  upload.single("media"),
+  sendMessage
+);
 
 // Protected routes
 router.get("/users", protectRoute, getUsersForSidebar);
