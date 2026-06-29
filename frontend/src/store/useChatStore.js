@@ -104,17 +104,15 @@ export const useChatStore = create(
 
       setSelectedUser: (selectedUser) => set({ selectedUser }),
 
-      setActiveConversationId: (activeConversationId) => {
-        set((state) => ({
-          activeConversationId,
-          selectedUser:
-            state.users.find((user) => user._id === activeConversationId) ||
-            state.conversations.find((user) => user._id === activeConversationId) ||
-            null,
-          messages: activeConversationId ? state.messages : [],
-        }));
-      },
-
+      setActiveConversationId: (id) => {
+  set((state) => ({
+    activeConversationId: id,
+    selectedUser:
+      state.users.find((u) => u._id === id) ||
+      state.conversations.find((c) => c._id === id) ||
+      null,
+  }));
+},
       setSearchQuery: (searchQuery) => set({ searchQuery }),
       setSidebarTab: (sidebarTab) => set({ sidebarTab }),
       setComposerText: (composerText) => set({ composerText }),
