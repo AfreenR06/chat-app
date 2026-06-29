@@ -30,6 +30,7 @@ function ChatPage() {
     subscribeToMessages(activeConversationId);
 
     // cleanup
+    
     return () => unsubscribeFromMessages();
   }, [getMessages, activeConversationId, subscribeToMessages, unsubscribeFromMessages]);
 
