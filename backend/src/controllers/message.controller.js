@@ -203,3 +203,47 @@ export async function sendMessage(req, res) {
     });
   }
 }
+export async function deleteMessage(req,res){
+
+try{
+
+const message =
+await Message.findById(req.params.id);
+
+if(!message){
+
+return res.status(404).json({
+message:"Not found"
+});
+
+}
+
+if(String(message.senderId)!==String(req.user._id)){
+
+return res.status(403).json({
+message:"Unauthorized"
+});
+
+}
+
+const receiverSocketId = getReceiverSocketId(message.receiverId);
+
+await Message.findByIdAndDelete(req.params.id);
+
+if (receiverSocketId) {
+  io.to(receiverSocketId).emit("messageDeleted", req.params.id);
+}
+
+res.json({
+  success: true,
+});
+
+}catch(err){
+
+res.status(500).json({
+message:err.message
+});
+
+}
+
+}

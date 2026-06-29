@@ -4,6 +4,7 @@ import {
   getMessages,
   getUsersForSidebar,
   sendMessage,
+  deleteMessage,
 } from "../controllers/message.controller.js";
 
 import { protectRoute } from "../middleware/auth.middleware.js";
@@ -23,5 +24,6 @@ router.post(
 router.get("/users", protectRoute, getUsersForSidebar);
 router.get("/conversations", protectRoute, getConversationsForSidebar);
 router.get("/:id", protectRoute, getMessages);
+router.delete("/:id", protectRoute, deleteMessage);
 
 export default router;
